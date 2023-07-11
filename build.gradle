@@ -8,11 +8,8 @@ version = '0.2'
 repositories {
     maven { url "http://repo.dotcms.com/artifactory/libs-release" }
 }
-configurations {
-    osgiLibs
-}
 dependencies {
-    compile('com.dotcms:dotcms:23.01.3') { transitive = true }
+    compile('com.dotcms:dotcms:22.05') { transitive = true }
 }
 
 import java.util.jar.*
@@ -38,15 +35,6 @@ task cleanLibFiles(type: Delete) {
         include "**/*"
     }
 }
-
-task copyToLib(type: Copy) {
-    from configurations.osgiLibs
-    into "src/main/resources/libs"
-}
-
-
-compileJava.dependsOn copyToLib
-
 
 jar.finalizedBy 'fragmentJar'
 
